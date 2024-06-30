@@ -186,3 +186,38 @@ greet()('Jack')
 
 */
 
+/* 
+
+There are three types of scope:
+
+Global (declaration outside of any function)
+Function (declaration inside a function)
+Block (declaration inside a block)
+
+*/
+
+/*  Closures in JavaScript  */
+
+// A function bundled together with its lexical environment forms a closure. - MDN
+
+// Lexiacal Environment - It is essentially the surrounding state – the local memory along with the lexical environment of its parent.
+
+// If a function is enclosed inside another function it will have the lexical environment of its parent.
+
+
+function x() {
+    var a = 7
+    function y() {
+      console.log(a)
+    }
+    return y
+  }
+
+  var z = x(); // involed x() -> returns y -> y() -> prints the value of a i.e. 7
+  console.log(z); // z takes the whole y function as its value
+  z(); // y is executed basically, prints the value of a i.e. 7
+
+// when we invoke z(), y has to log a so it first tries to find 🔍 it in the local memory but it's not there. It goes to its parent function. It finds a there.
+
+// This is closure
+
