@@ -275,7 +275,143 @@ function counter(){
 }
 
 var adder = counter();
-adder();
-adder();
+//adder();
+//adder();
 
 /*  Disadvantages of closures - Overconsumption of memory or memory leaks can happen. */
+
+
+/* Hoisting in JavaScript */
+
+// This is JavaScript's default behavior of moving declarations to the top of the program.
+
+// var declaration is hoisted up and initialized with undefined.
+
+// let and const declarations are hoisted up but not initialized.
+
+// function definitions are also hoisted up and stored as they are.
+
+
+/*  this  */
+
+//console.log(this); // points to the window object
+
+function myFunc() {
+    console.log(this)     
+}
+ 
+// myFunc(); - window()
+const obj = {
+  bool: true,
+  myFunc: myFunc,
+}
+
+//obj.myFunc() // - obj{}
+
+// What we did above is Implicit Binding
+
+// Explicit binding is when you force a function to use a certain object as its this.
+
+const student_1 =  {
+    name: 'Randall',
+    displayName_1: function displayName() {
+        console.log(this.name)
+    }
+}
+const student_2 =  {
+    name: 'Raj',
+    /*displayName_2: function displayName() {
+        console.log(this.name)
+    }*/
+}
+
+//student_1.displayName_1()
+//student_2.displayName_2()
+
+//student_1.displayName_1();
+//student_1.displayName_1.call(student_2); // using the same function() keeping it DRY
+
+// call forced displayName_1 to use the second object as its this.
+
+const myData = {
+    name: 'Rajat',
+    city: 'Delhi',
+    displayStay: function() {
+      console.log(this.name, 'stays in', this.city)
+    },
+  }
+ // myData.displayStay()
+  
+// create an object yourData and try to use displayStay
+const yourData = {
+name: 'Raj',
+city: 'Mumbai'
+}
+
+
+// answer
+//myData.displayStay.call(yourData)
+
+// There are differences b/w arrow functions and regular functions
+// For an arrow function, the value of this depends on the lexical scope – that is to say, the outer function where the arrow function is declared.
+// if we make the displayName() from above an arrow function, nothing will work.
+// Arrow functions basically inherit the parent's context which in the above case is the window.
+
+
+/* Prototypes and Prototypal Inheritance */
+
+// Whenever we create anything (like an object or function) in JavaScript, the JS Engine automatically attaches that thing with some properties and methods.
+
+// __proto__ is the object where JS is putting it all.
+
+//let arr = ['Rajat', 'Raj']
+//console.log(arr.__proto__.forEach)
+//console.log(arr.__proto__) // same as Array.prototype
+//console.log(arr.__proto__.__proto__) // same as Object.prototype
+//console.log(arr.__proto__.__proto__.__proto__) // null
+
+// All this is called the prototype chain
+
+// We will always find Object.prototype behind the scenes. That's why you may have heard that everything in JS is an object. 🤯
+
+/*
+let object = {
+    name: 'Rajat',
+    city: 'Delhi',
+    getIntro: function () {
+      console.log(`${this.name}, ${this.city}`)
+    },
+  }
+  
+  let object2 = {
+    name: 'Aditya',
+  }
+
+
+
+  object2.__proto__ = object
+
+  console.log(object2.city);
+
+  function Person(name, age) {
+    this.name = name;
+    this.age = age;
+   }
+   Person.prototype.display = function() {
+    console.log(this.name, this.age);
+   };
+
+   function Employee(name, age, salary) {
+    Person.call(this, name, age);
+    this.salary = salary;
+   }
+   Employee.prototype = Object.create(Person.prototype);
+   const emp = new Employee('Mike', 20, 4000);
+   console.log(emp); // {name: "Mike", age: 20, salary: 4000}
+   emp.display(); //  Error: emp.display is not a function if we don't assign prototype of employee
+
+   */
+
+
+   /* Asynchronous JavaScript ⚡*/
+
