@@ -213,11 +213,69 @@ function x() {
     return y
   }
 
-  var z = x(); // involed x() -> returns y -> y() -> prints the value of a i.e. 7
-  console.log(z); // z takes the whole y function as its value
-  z(); // y is executed basically, prints the value of a i.e. 7
+ // var z = x(); // involed x() -> returns y -> y() -> prints the value of a i.e. 7
+ // console.log(z); // z takes the whole y function as its value
+ // z(); // y is executed basically, prints the value of a i.e. 7
 
 // when we invoke z(), y has to log a so it first tries to find 🔍 it in the local memory but it's not there. It goes to its parent function. It finds a there.
 
 // This is closure
 
+// Even when functions are returned (in the above case y) they still remember their lexical scope (where it came from)
+
+
+var expect = function(val) {
+    return {
+        toBe: (val2) => {
+            if (val !== val2) throw new Error("Not Equal");
+            else return true;
+        },
+        notToBe: (val2) => {
+            if (val === val2) throw new Error("Equal");
+            else return true;
+        }
+    }
+};
+expect(5).toBe(5); // true
+ //expect(5).notToBe(5); // throws "Equal"
+ 
+
+ /* Currying */
+
+// Currying in JavaScript is a technique of transforming a function that takes multiple arguments, 
+// into a sequence of functions, each taking a single argument. 
+// It is a process of breaking down a function with multiple arguments into a series of unary (single-argument) functions.
+
+// Non curried fn()
+function add(a, b) {
+  return a + b;
+}
+//console.log(add(2, 3)); // Outputs: 5
+
+
+// Curried fn()
+function addCurried(a){
+    return function(b){
+        return a + b;
+    }
+}
+
+const addTwo = addCurried(2);
+//console.log(addTwo(3)); 
+
+
+/* Data hiding/Encapsulation */
+
+function counter(){
+    var count = 0;
+    return function(){
+        count++;
+        console.log(count);
+    }
+}
+
+var adder = counter();
+adder();
+adder();
+
+/*  Disadvantages of closures - Overconsumption of memory or memory leaks can happen. */
