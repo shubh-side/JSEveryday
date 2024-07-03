@@ -415,3 +415,16 @@ let object = {
 
    /* Asynchronous JavaScript ⚡*/
 
+function z(){
+    var b = 9;
+    function x(){
+        var a = 7;
+        function y(){
+            console.log(a, b);
+        }
+        a = 10;
+        y();
+    }
+    x();
+}
+z();
