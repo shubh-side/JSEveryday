@@ -413,8 +413,6 @@ let object = {
    */
 
 
-   /* Asynchronous JavaScript ⚡*/
-
 function z(){
     var b = 9;
     function x(){
@@ -427,4 +425,82 @@ function z(){
     }
     x();
 }
-z();
+//z();
+
+/*function x(){
+    //var i = 1;
+
+    for(let i=1;i<=5;i++){
+        setTimeout(function(){
+            console.log(i);
+        }, 2000);
+    }
+    
+    console.log("We ain't waiting!");
+}
+*/
+
+// when we use let in above loop, it works fine because let is block scoped, everytime a new copy of i is made in each iteration.
+
+// Working solution using var - using closures we create a new copy of i everytime
+function x(){
+    for(var i=1;i<=5;i++){
+        function help(i){
+            setTimeout(function(){
+                console.log(i);
+            }, i*2000);
+        }
+        help(i);
+    }
+    
+    console.log("We ain't waiting!");
+}
+
+//x();
+
+
+// Function Statement or Function Declaration
+
+//a();
+function a(){
+    console.log("a called"); 
+}
+
+
+// Function Expression
+
+//b();
+var b = function(){
+    console.log("b called");
+}
+
+// Difference between above two is hoisting
+
+// Anonymous Function - without a name
+//function(){
+
+//}
+// used in a place where functions are used as values
+// like in above Function Expression
+
+
+// Named Function Expression
+
+var c = function abc(){
+    console.log("c called");
+}
+
+//c();
+//abc(); //gives an error, cause it is not in global scope
+
+// First class functions - functions which are used inside other functions as arguments are called first class functions
+// ability to be used as values
+var e = function(param1){
+    return function xyz(){
+
+    }
+}
+
+console.log(e());
+
+   /* Asynchronous JavaScript ⚡*/
